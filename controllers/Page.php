@@ -14,8 +14,8 @@ class Page  extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper(['form', 'url', 'string']);
-        $this->load->library(['session', 'captcha', 'form_validation']);
+        $this->load->helper(array('form', 'url', 'string'));
+        $this->load->library(array('session', 'captcha', 'form_validation'));
     }
 
 
@@ -25,7 +25,7 @@ class Page  extends CI_Controller
     public function getCaptchaImg()
     {
         $captchaCode = $this->captcha->getCaptcha(self::CAPTCHA_CHARACTERS_NUM); //不传参，默认为4
-        $this->session->set_userdata('captcha', $captchaCode);
+        $this->session->set_userdata('captcha', strtolower($captchaCode));
         $this->captcha->showImg(self::CAPTCHA_IMAGE_WIDTH, self::CAPTCHA_IMAGE_HEIGHT); //不传参默认80,30
     }
 
@@ -60,7 +60,7 @@ class Page  extends CI_Controller
             //获取生成验证码图片时存储的验证码文字session值 captcha
             $captchaCode = $this->session->userdata('captcha');
 
-            if ($code == $captchaCode)
+            if (strtolower($code) == $captchaCode)
             {
                 echo '验证通过！';
             }
