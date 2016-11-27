@@ -21,7 +21,7 @@ class Captcha
         $this->outputImg();
     }
 
-    function getCaptcha($codeNum = 4){
+    function getCaptcha($codeNum = self::CODE_NUM){
         $this->codeNum = $codeNum;
         $this->code = random_string('alnum', $this->codeNum); //使用CI string辅助函数
         return $this->code;
