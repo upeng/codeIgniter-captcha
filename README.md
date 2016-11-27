@@ -26,9 +26,9 @@ const CAPTCHA_IMAGE_HEIGHT = 40;    //设置验证码图片高度
 
 3. getCaptchaImg用于生成验证码图片，存储验证码字符；
 在CI中直接访问 page/getcaptchaimg就可以返回验证码图片
-
-注：因存储验证码图片的方式不唯一，此处设置sess_driver为files,因此需要设置sess_save_path
 ```
+注：因存储验证码图片的方式不唯一，此处设置sess_driver为files,因此需要设置sess_save_path
+
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
