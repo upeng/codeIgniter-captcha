@@ -26,7 +26,7 @@ class Page  extends CI_Controller
     {
         $captchaCode = $this->captcha->getCaptcha(self::CAPTCHA_CHARACTERS_NUM); //不传参，默认为4
         $this->session->set_userdata('captcha', $captchaCode);
-        $this->captcha->showImg(self::CAPTCHA_IMAGE_WIDTH, self::CAPTCHA_IMAGE_HEIGHT); //不传参默认100,30
+        $this->captcha->showImg(self::CAPTCHA_IMAGE_WIDTH, self::CAPTCHA_IMAGE_HEIGHT); //不传参默认80,30
     }
 
 
