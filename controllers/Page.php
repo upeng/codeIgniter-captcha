@@ -4,8 +4,8 @@
  * 支持自定义验证码字符个数，图片宽度和高度
  *
  */
-class Page  extends CI_Controller{
-
+class Page  extends CI_Controller
+{
     const CAPTCHA_CHARACTERS_NUM = 5;   //验证码字符个数
     const CAPTCHA_IMAGE_WIDTH = 200;    //验证码图片宽度
     const CAPTCHA_IMAGE_HEIGHT = 40;    //验证码图片高度
@@ -63,4 +63,5 @@ class Page  extends CI_Controller{
             }
         }
     }
+    
 }
