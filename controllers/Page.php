@@ -4,15 +4,13 @@
  * 支持自定义验证码字符个数，图片宽度和高度
  *
  */
-class Page  extends CI_Controller
-{
+class Page  extends CI_Controller{
 
     const CAPTCHA_CHARACTERS_NUM = 5;   //验证码字符个数
     const CAPTCHA_IMAGE_WIDTH = 200;    //验证码图片宽度
     const CAPTCHA_IMAGE_HEIGHT = 40;    //验证码图片高度
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->helper(array('form', 'url', 'string'));
         $this->load->library(array('session', 'captcha', 'form_validation'));
@@ -22,8 +20,7 @@ class Page  extends CI_Controller
     /**
      * 生成验证码图片地址，调用此方法即可显示image
      */
-    public function getCaptchaImg()
-    {
+    public function getCaptchaImg(){
         $captchaCode = $this->captcha->getCaptcha(self::CAPTCHA_CHARACTERS_NUM); //不传参，默认为4
         $this->session->set_userdata('captcha', strtolower($captchaCode));
         $this->captcha->showImg(self::CAPTCHA_IMAGE_WIDTH, self::CAPTCHA_IMAGE_HEIGHT); //不传参默认80,30
@@ -33,8 +30,7 @@ class Page  extends CI_Controller
     /**
      * 验证提交的验证码是否正确
      */
-    public function codeValidate()
-    {
+    public function codeValidate(){
         $config = array(
             array(
                 'field' => 'code',
@@ -49,23 +45,19 @@ class Page  extends CI_Controller
         $this->form_validation->set_rules($config);
 
         //默认没有提交表单时，展示验证码和待提交表单
-        if ($this->form_validation->run() === FALSE)
-        {
+        if ($this->form_validation->run() === FALSE){
             $this->load->view('page_view');
         }
-        else
-        {
+        else{
             //获取提交表单的code字段
             $code = $this->input->post('code');
             //获取生成验证码图片时存储的验证码文字session值 captcha
             $captchaCode = $this->session->userdata('captcha');
 
-            if (strtolower($code) == $captchaCode)
-            {
+            if (strtolower($code) == $captchaCode){
                 echo '验证通过！';
             }
-            else
-            {
+            else{
                 $data['validate_failed'] = '验证失败！';
                 $this->load->view('page_view', $data);
             }
